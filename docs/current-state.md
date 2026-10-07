@@ -2,31 +2,32 @@
 
 > **Live progress tracker.** Owned and updated exclusively by the `architect` agent after every completed task and every phase transition. All other agents must read this file at the start of a task and must never write to it. Record only verified facts — never invent progress. When this file and the repository disagree, the repository wins and the discrepancy must be reported.
 
-_Last updated: 2026-10-07 — by architect (M0-01B completion)_
+_Last updated: 2026-10-07 — by architect (M1-01 complete; Phase 0 closeout deferred)_
 
 ## Project stage
 
-**PHASE 0 IN PROGRESS — scaffold is verified; no business functionality has been implemented.**
+**PHASE 1 APPLICATION WORK IN PROGRESS — Commerce Order domain behavior is implemented.**
 
-The repository contains the planning and agent-configuration baseline plus the empty .NET solution/project scaffolds. The Git baseline is pushed to `origin/main`. The scaffold contains host boilerplate and placeholder tests only; no domain behavior, endpoints, database schemas, messaging implementation, infrastructure, or CI pipeline exists. A clean clone of `origin/main` restored, built, and passed the eight scaffold tests.
+The repository contains the planning and agent-configuration baseline, .NET solution/scaffolds, Phase 0 GitHub/CI foundation, and the M1-01 Commerce Order model with unit tests. The Commerce hosts still have no endpoints or worker processing; there are no database schemas or messaging implementation. Phase 0 is **not declared complete**; its non-blocking closeout items remain tracked while application work proceeds per explicit user direction.
 
 ## Current phase
 
-**Phase 0 — Repository and Architecture Foundation** (Milestone M0) is in progress. The next phase after Phase 0 exit criteria are verified is:
+**Phase 1 — Domain and Contracts** (M1 Secure Order Acceptance workstream) is active. Phase 0 remains formally open; no Phase 0 completion gate is claimed. The plan-defined sequence continues:
 
-- **Phase 1 — Domain and Contracts**
+- Phase 1 Domain and Contracts → Phase 2 SQL Ownership and Persistence → remaining phases in `PLAN.md`.
 
 ## Current task
 
-**M0-01B — Phase 0 GitHub and CI foundation is complete (Reviewer PASS).** This commit records the workflow/templates and tracker state; no business functionality was implemented.
+**M1-01 — Commerce Order domain model and invariants is complete (Reviewer PASS).** Build/tests passed, and the logical task commit is being pushed per the owner's request.
 
-- **Next task: M0-01C — GitHub project-management foundation.** Establish the PLAN-defined issue labels, milestones, and project-board structure. The first actual GitHub Actions run and the license decision remain outstanding; do not declare Phase 0 complete until the plan's exit criteria are evidenced.
+- M0-01B remains complete (Reviewer PASS). Further GitHub/project-board administration remains deferred; it is not the current task.
 
 ## Completed phases
 
 | Phase | Milestone | Status | Completed (verified) | Notes |
 |---|---|---|---|---|
-| Phase 0 | M0 — Foundation | In progress | — | Git baseline complete; scaffold present; Phase 0 exit criteria not yet met. |
+| Phase 0 | M0 — Foundation | Closeout deferred / not complete | — | Git baseline, reviewed scaffold, and CI/template artifacts exist. Formal M0 exit criteria are not claimed complete. |
+| Phase 1 | M1 — Secure Order Acceptance | In progress | — | M1-01 domain model complete; next Phase 1 contracts task remains. |
 
 ## Completed tasks
 
@@ -35,6 +36,7 @@ The repository contains the planning and agent-configuration baseline plus the e
 | M0-GIT-01 | Initialize Git, add .NET `.gitignore`, create baseline commit, configure `origin` | PASS | 2026-10-07 | Initial commit `9cb8ec7a808027cc66a5d086ea28f98461766d34`; reviewer PASS; branch `main`; remote configured; baseline subsequently pushed. |
 | M0-01A-REVIEW | Independently review existing empty .NET scaffold and verify clean-clone build/test | PASS | 2026-10-07 | Reviewer PASS; clean clone at `ddf625c606f2b1d787247130018a4479096856da`; `dotnet restore`, `dotnet build --no-restore` (0 warnings/errors), and `dotnet test --no-build` (8 passed). |
 | M0-01B | Add Phase 0 GitHub PR/issue templates and minimal PR CI | PASS | 2026-10-07 | Infra validation and final Reviewer PASS; actionlint + issue-frontmatter parsing; `dotnet restore`, `dotnet build` (0 warnings/errors), `dotnet test` (8 passed); exact task changes are in this commit. |
+| M1-01 | Commerce Order aggregate, value objects, lifecycle invariants, tests, and domain documentation | PASS | 2026-10-07 | Reviewer PASS after default-struct invariant fix; Architect verified `dotnet build` (0 warnings/errors), Commerce tests (159 passed), full suite (166 passed); commit/push recorded in Git history. |
 
 ## Active decisions (ADRs)
 
@@ -54,16 +56,18 @@ The repository contains the planning and agent-configuration baseline plus the e
 - The six local development settings/launch-profile files are intentionally ignored and absent from a clean clone; the solution builds and tests without them.
 - GitHub Actions workflow is configured and locally validated, but no live GitHub Actions run has been observed yet. This remains required evidence for Phase 0 exit.
 - GitHub issue labels, milestones, and Project board have not yet been configured in repository settings.
+- The repository owner has not selected a license; no `LICENSE` will be added without that decision.
+- ADR-001/002 status remains Proposed; their contents restate decisions fixed by `PLAN.md`. Formal status acceptance remains Phase 0 closeout and is not being treated as an unresolved design for M1-01.
+- Existing local commits were preserved; the M1-01 commit and these prior task commits were pushed to `origin/main` per the owner's explicit instruction.
 
 ## Known blockers
 
-- Repository owner license choice is still required before adding `LICENSE`.
-- GitHub-side project setup and a first live CI run remain outstanding before Phase 0 can be declared complete.
+- No business implementation blocker is known. M0 formal closeout remains pending its CI/ADR/license and GitHub project-management evidence, but this does not block the active Phase 1 task sequence under the owner's instruction.
 
 ## Next task
 
-1. **M0-01C — GitHub project-management foundation:** configure the PLAN-defined labels, milestones, and board structure; verify GitHub issue forms can use the labels.
-2. Run/verify the first GitHub Actions workflow on a PR before Phase 0 exit; obtain the owner's license choice and accept/reject ADR-001/002. Do not begin Phase 1 until all Phase 0 exit criteria in `PLAN.md` are evidenced.
+1. **M1-02 — Integration contract envelope and failure/reason codes:** define versioned commands/events and safe failure codes as the next Phase 1 Domain & Contracts task.
+2. Do not declare M0 complete until its formal exit criteria are later verified; defer GitHub administration unless the owner specifically requests it.
 
 ## Update protocol (for the architect)
 

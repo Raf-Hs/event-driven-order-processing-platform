@@ -6,11 +6,11 @@ testing, and Azure deployment. A customer submits an order; the platform reserve
 authorizes a simulated payment, and reports a durable order outcome — correctly, even when
 services, databases, or the broker fail or deliver messages more than once.
 
-**Status: Phase 0 — repository and architecture foundation (M0).** The repository contains an empty,
-buildable .NET solution scaffold, GitHub contribution templates, and a minimal PR validation workflow.
-The workflow validates restore/build/test; run results are available in GitHub Actions. No business
-behavior, API endpoints, database schemas, or messaging implementations exist yet; they are introduced
-phase by phase per [`PLAN.md`](PLAN.md).
+**Status: Phase 1 — Domain and Contracts.** The Commerce Order domain model, its value objects/state
+transitions, and focused tests are implemented (M1-01). The service hosts remain scaffolds: no API,
+database schema, messaging, or end-to-end workflow is implemented yet. The GitHub workflow validates
+restore/build/test; its run history is available in GitHub Actions. Remaining Phase 0 closeout items
+are tracked in [`docs/current-state.md`](docs/current-state.md); Phase 0 is not declared complete.
 
 ## Architecture at a glance
 
@@ -51,19 +51,19 @@ dotnet test OrderProcessingPlatform.sln
 
 The build enforces nullable reference types, .NET analyzers (`latest-recommended`), code-style
 rules from `.editorconfig`, central package versions (`Directory.Packages.props`), and
-warnings-as-errors. The test suite currently contains only per-project harness placeholders that
-prove the xUnit wiring for each test boundary; real tests are added from Phase 1 onward.
+warnings-as-errors. Commerce has 159 Order-domain unit tests; the other test projects still contain
+Phase 0 harness placeholders to be replaced in their planned phases.
 
 ## Repository layout
 
-Per PLAN.md §24 (directories not yet needed by Phase 0 are intentionally absent and are added with
-their owning phase):
+Per PLAN.md §24 (directories not yet needed are added with their owning phase):
 
 ```text
 .
 ├── README.md · PLAN.md · ARCHITECTURE.md · CONTRIBUTING.md
 ├── global.json · Directory.Build.props · Directory.Packages.props · .editorconfig
 ├── OrderProcessingPlatform.sln
+├── .github/              # PR/issue templates and minimal CI
 ├── src/
 │   ├── BuildingBlocks/   # Messaging.Abstractions · Messaging.Contracts · Observability
 │   ├── Commerce/         # Commerce.Api · Application · Domain · Infrastructure
@@ -75,6 +75,7 @@ their owning phase):
 │   ├── Payments.UnitTests · Payments.IntegrationTests
 │   └── Contracts.Tests · EndToEnd.Tests
 └── docs/
+    ├── architecture/     # Implemented domain/state-machine documentation
     └── adr/              # ADR template + ADR-001/002 (see docs/adr/README.md)
 ```
 
@@ -91,7 +92,8 @@ their owning phase):
 
 ## Limitations (honest current state)
 
-- Empty project scaffolds only — the hosts build and start but expose no endpoints and run no work.
+- Service hosts remain scaffolds and expose no endpoints or worker processing. The Commerce Order
+  domain/state model is implemented and tested; it is not yet connected to persistence or a workflow.
 - **M0 baseline status:** Git initialization and `.gitignore` are established (verified in
   `docs/current-state.md`, task M0-GIT-01); the scaffold passed clean-clone build/test review
   (M0-01A); M0-01B provides PR/issue templates and minimal PR validation CI. The workflow runs

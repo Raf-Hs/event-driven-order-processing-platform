@@ -2,8 +2,8 @@
 
 This document reflects [`PLAN.md`](PLAN.md) (the authoritative source) at the C4 context and
 container levels, per PLAN.md §10–§18 and the documentation strategy §25. **Current repository
-state: Phase 0 scaffold** — the containers below exist as empty, buildable projects only; arrows
-describe the planned runtime topology, not implemented behavior.
+state: Phase 1.** The Commerce Order domain model and state tests exist; service hosts and the
+distributed runtime topology below remain planned scaffolds until their roadmap phases.
 
 ## Context (C4 Level 1)
 
@@ -115,8 +115,9 @@ isolation with separate credentials, not independent compute failure isolation.
 
 ## Where each piece lands in the roadmap
 
-Projects in `src/` and `tests/` are currently empty scaffolds with build-wired references only.
-Domain/contracts → Phase 1 · schemas/migrations → Phase 2 · identity/auth → Phase 3 · order
+Commerce Order domain/value objects/state transitions are implemented in Phase 1 (M1-01), with
+unit tests and detail in `docs/architecture/order-domain.md`. Other projects remain build-wired
+scaffolds. Integration contracts → Phase 1 · schemas/migrations → Phase 2 · identity/auth → Phase 3 · order
 acceptance API → Phase 4 · messaging adapters → Phase 5 · outbox → 6 · inbox → 7 · inventory → 8 ·
 payment simulator → 9 · saga/compensation → 10 · observability → 11 · test hardening → 12 ·
 Docker/Compose → 13 · CI gates → 14 · Azure → 15 · Angular client → 16 · portfolio/docs hardening →

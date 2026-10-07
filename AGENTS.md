@@ -20,4 +20,4 @@ Instructions for all AI agents working in this repository.
 - Database-per-service; no cross-service data access or shared business logic; no synchronous service-to-service calls in the order workflow.
 - Transactional outbox + transactional inbox + idempotent consumers + at-least-once delivery. Never claim exactly-once.
 - No future-phase scope creep; no secrets in code, config, images, workflows, logs, or docs.
-- Phase 0 is in progress: the empty .NET solution/project scaffold and Git baseline are present, but no business/domain functionality has been implemented. Read `docs/current-state.md` for the verified current task. Do not begin any work without an explicit task brief from the architect.
+- Phase 1 application work is active: the Commerce Order domain model is implemented; API, persistence, messaging, and end-to-end behavior are not yet present. Phase 0 formal closeout remains open. Read `docs/current-state.md` for verified progress and the next task. Do not begin any work without an explicit task brief from the architect.
