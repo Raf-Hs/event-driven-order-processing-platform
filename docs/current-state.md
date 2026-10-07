@@ -2,7 +2,7 @@
 
 > **Live progress tracker.** Owned and updated exclusively by the `architect` agent after every completed task and every phase transition. All other agents must read this file at the start of a task and must never write to it. Record only verified facts — never invent progress. When this file and the repository disagree, the repository wins and the discrepancy must be reported.
 
-_Last updated: 2026-10-07 — by architect (M0-01A review completion)_
+_Last updated: 2026-10-07 — by architect (M0-01B completion)_
 
 ## Project stage
 
@@ -18,9 +18,9 @@ The repository contains the planning and agent-configuration baseline plus the e
 
 ## Current task
 
-**M0-01A scaffold review is complete (PASS).** The scaffold was present in the pushed baseline and has been independently reviewed and verified from a clean clone.
+**M0-01B — Phase 0 GitHub and CI foundation is complete (Reviewer PASS).** This commit records the workflow/templates and tracker state; no business functionality was implemented.
 
-- **Next task: M0-01B — Phase 0 GitHub and CI foundation.** Add the planned minimal PR validation workflow and GitHub contribution templates. No GitHub Actions have been created yet. The license decision remains with the repository owner.
+- **Next task: M0-01C — GitHub project-management foundation.** Establish the PLAN-defined issue labels, milestones, and project-board structure. The first actual GitHub Actions run and the license decision remain outstanding; do not declare Phase 0 complete until the plan's exit criteria are evidenced.
 
 ## Completed phases
 
@@ -34,6 +34,7 @@ The repository contains the planning and agent-configuration baseline plus the e
 |---|---|---|---|---|
 | M0-GIT-01 | Initialize Git, add .NET `.gitignore`, create baseline commit, configure `origin` | PASS | 2026-10-07 | Initial commit `9cb8ec7a808027cc66a5d086ea28f98461766d34`; reviewer PASS; branch `main`; remote configured; baseline subsequently pushed. |
 | M0-01A-REVIEW | Independently review existing empty .NET scaffold and verify clean-clone build/test | PASS | 2026-10-07 | Reviewer PASS; clean clone at `ddf625c606f2b1d787247130018a4479096856da`; `dotnet restore`, `dotnet build --no-restore` (0 warnings/errors), and `dotnet test --no-build` (8 passed). |
+| M0-01B | Add Phase 0 GitHub PR/issue templates and minimal PR CI | PASS | 2026-10-07 | Infra validation and final Reviewer PASS; actionlint + issue-frontmatter parsing; `dotnet restore`, `dotnet build` (0 warnings/errors), `dotnet test` (8 passed); exact task changes are in this commit. |
 
 ## Active decisions (ADRs)
 
@@ -48,18 +49,21 @@ The repository contains the planning and agent-configuration baseline plus the e
 - MVP boundaries are fixed: three deployables (Commerce API, Inventory Worker, Payment Worker), database-per-service, RabbitMQ local / Azure Service Bus in Azure, orchestrated saga, outbox/inbox, at-least-once + idempotent consumers.
 - Explicitly excluded: Kubernetes, event sourcing, CQRS infrastructure, generic workflow engine, multi-region, real payments/card data, shipment, notification service (Phase 2), cancellation flows (Phase 2), Azure Storage/Functions as MVP dependencies.
 - OpenCode multi-agent structure is in place: `architect` (primary orchestrator) delegating to `implementer`, `reviewer` (read-only), `infra`, `escalation`; subagent depth 1 (workers cannot spawn workers).
-- Git repository is on `main`; `origin` is `https://github.com/Raf-Hs/event-driven-order-processing-platform.git`; baseline commit `ddf625c606f2b1d787247130018a4479096856da` was verified equal to `origin/main` during this task.
+- Git repository is on `main`; `origin` is `https://github.com/Raf-Hs/event-driven-order-processing-platform.git`; pushed baseline `ddf625c606f2b1d787247130018a4479096856da` was verified equal to `origin/main` at cycle start. The M0-01A tracker commit and this M0-01B commit remain local and unpushed; history is preserved.
 - No license choice is recorded; do not add a license until the repository owner decides.
 - The six local development settings/launch-profile files are intentionally ignored and absent from a clean clone; the solution builds and tests without them.
+- GitHub Actions workflow is configured and locally validated, but no live GitHub Actions run has been observed yet. This remains required evidence for Phase 0 exit.
+- GitHub issue labels, milestones, and Project board have not yet been configured in repository settings.
 
 ## Known blockers
 
-- None recorded.
+- Repository owner license choice is still required before adding `LICENSE`.
+- GitHub-side project setup and a first live CI run remain outstanding before Phase 0 can be declared complete.
 
 ## Next task
 
-1. **M0-01B — Phase 0 GitHub and CI foundation:** add minimal PR validation workflow and GitHub contribution templates through INFRA, then independent REVIEWER pass.
-2. Resolve the human license choice and accept/reject the proposed ADR-001/002 before declaring M0 complete. Do not begin Phase 1 until all Phase 0 exit criteria in `PLAN.md` are evidenced.
+1. **M0-01C — GitHub project-management foundation:** configure the PLAN-defined labels, milestones, and board structure; verify GitHub issue forms can use the labels.
+2. Run/verify the first GitHub Actions workflow on a PR before Phase 0 exit; obtain the owner's license choice and accept/reject ADR-001/002. Do not begin Phase 1 until all Phase 0 exit criteria in `PLAN.md` are evidenced.
 
 ## Update protocol (for the architect)
 

@@ -6,10 +6,11 @@ testing, and Azure deployment. A customer submits an order; the platform reserve
 authorizes a simulated payment, and reports a durable order outcome — correctly, even when
 services, databases, or the broker fail or deliver messages more than once.
 
-**Status: Phase 0 — repository and architecture foundation (M0).** The repository currently contains
-an empty, buildable .NET solution scaffold and engineering/contribution documentation only.
-No business behavior, API endpoints, database schemas, or messaging implementations exist yet; they
-are introduced phase by phase per [`PLAN.md`](PLAN.md).
+**Status: Phase 0 — repository and architecture foundation (M0).** The repository contains an empty,
+buildable .NET solution scaffold, GitHub contribution templates, and a minimal PR validation workflow.
+The workflow validates restore/build/test; run results are available in GitHub Actions. No business
+behavior, API endpoints, database schemas, or messaging implementations exist yet; they are introduced
+phase by phase per [`PLAN.md`](PLAN.md).
 
 ## Architecture at a glance
 
@@ -91,8 +92,11 @@ their owning phase):
 ## Limitations (honest current state)
 
 - Empty project scaffolds only — the hosts build and start but expose no endpoints and run no work.
-- Git initialization, `.gitignore`, PR/issue templates, and the CI workflow are owned by the
-  infrastructure follow-up of M0 and are not part of this scaffold.
+- **M0 baseline status:** Git initialization and `.gitignore` are established (verified in
+  `docs/current-state.md`, task M0-GIT-01); the scaffold passed clean-clone build/test review
+  (M0-01A); M0-01B provides PR/issue templates and minimal PR validation CI. The workflow runs
+  restore/build/test only; GitHub Actions records runs in the repository's Actions tab.
+  Expanded quality/security gates remain in their planned later phases.
 - No license has been selected yet: the repository has **no licensing decision on record**, so no
   `LICENSE` file is included (it would itself be an unapproved decision). This is flagged to the
   human owner for an explicit choice; see `CONTRIBUTING.md`.

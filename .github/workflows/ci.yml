@@ -1,0 +1,72 @@
+# =============================================================================
+# CI baseline — Phase 0 (M0-01B)
+#
+# Minimal PR validation pipeline per PLAN.md §27 "Pull Request Pipeline" and
+# the §31 Phase 0 / First Implementation Task scope: checkout, install the
+# .NET SDK resolved from global.json (10.0.401 with rollForward: latestFeature,
+# i.e. the pinned SDK policy), restore, build without restoring,
+# test without rebuilding.
+#
+# Intentionally NOT here (Phase 14 "CI Quality and Security Gates" / Phase 15
+# "Azure Infrastructure and Deployment"): integration/contract test suites
+# with SQL/broker service containers, formatting/analyzer gate steps, secret
+# and dependency scanning, Angular validation, test-report artifacts, Docker
+# image builds, Azure authentication/OIDC, and deployment. This workflow must
+# keep only the restore/build/test loop that validates the current scaffold.
+#
+# Least privilege: the job only reads repository contents and needs no write
+# token, no cloud credentials, and no secrets of any kind.
+# =============================================================================
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Supersede in-progress runs of this workflow on the same branch/PR so a force
+# push or rapid follow-up commit does not queue duplicate work.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+jobs:
+  build-test:
+    name: Restore, build, test (pinned SDK)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        # Pinned by commit (PLAN.md §27 "pinned/reviewed actions"); tag noted
+        # in the comment. Upstream: https://github.com/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup .NET SDK
+        # Upstream: https://github.com/actions/setup-dotnet
+        # global-json-file makes the action honor global.json, including its
+        # rollForward policy (the 10.0.4xx feature band, latestFeature).
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Show resolved SDK version
+        run: dotnet --version
+
+      - name: Restore
+        run: dotnet restore OrderProcessingPlatform.sln
+
+      - name: Build
+        run: dotnet build --no-restore OrderProcessingPlatform.sln
+
+      - name: Test
+        run: dotnet test --no-build OrderProcessingPlatform.sln
