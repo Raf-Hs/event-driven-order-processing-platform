@@ -1,0 +1,166 @@
+# =============================================================================
+# .gitignore — Event-Driven Order Processing Platform
+# .NET-centric ignore policy (PLAN.md §24 Repository Structure, §26 Docker and
+# Local Development, §14 Security: no secrets/local config in source).
+# Excludes: build output, IDE/user state, test/coverage artifacts, secrets and
+# key/certificate material, local development configuration, OS clutter.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# .NET / MSBuild build output and intermediate artifacts
+# -----------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+publish/
+*.binlog
+msbuild.log
+msbuild.err
+*.tmp
+*.log
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.userprefs
+
+# -----------------------------------------------------------------------------
+# NuGet / package artifacts
+# -----------------------------------------------------------------------------
+.nuget/
+[Pp]ackages/
+*.nupkg
+*.snupkg
+project.lock.json
+*.nuget.props
+*.nuget.targets
+.dotnet/
+
+# -----------------------------------------------------------------------------
+# Test results, coverage and benchmark output
+# -----------------------------------------------------------------------------
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+coverage.cobertura.xml
+[Bb]enchmark[Dd]ot[Nn]et.[Aa]rtifacts/
+
+# -----------------------------------------------------------------------------
+# IDE — Visual Studio
+# -----------------------------------------------------------------------------
+.vs/
+*.VC.db
+*.VC.VC.opendb
+*.cachefile
+*.VC.db-shm
+*.VC.db-wal
+
+# -----------------------------------------------------------------------------
+# IDE — JetBrains Rider / IntelliJ
+# -----------------------------------------------------------------------------
+.idea/
+*.idea/
+*.iml
+*.rsuser
+
+# -----------------------------------------------------------------------------
+# IDE — VS Code (user/workspace state; shared settings may be re-allowed later)
+# -----------------------------------------------------------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# -----------------------------------------------------------------------------
+# Local / development configuration (never commit per-environment overrides)
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.local.json
+appsettings.Development.json
+appsettings.Staging.json
+appsettings.Production.json
+**/Properties/launchSettings.json
+**/Properties/launchSettings.*.json
+docker-compose.override.yml
+secrets.json
+*.secrets.json
+
+# -----------------------------------------------------------------------------
+# Secrets / credentials / key & certificate material (defense in depth)
+# -----------------------------------------------------------------------------
+*.pfx
+*.p12
+*.crt
+*.cer
+*.der
+*.pem
+*.key
+*.jks
+*.kdbx
+*.ssh/
+id_rsa*
+id_ed25519*
+*.pubxml
+*.publishproj
+
+# -----------------------------------------------------------------------------
+# Local data dumps / disposable database files
+# -----------------------------------------------------------------------------
+*.mdf
+*.ldf
+*.ndf
+*.bak
+*.db
+*.sqlite
+*.db-journal
+*.db-shm
+*.db-wal
+
+# -----------------------------------------------------------------------------
+# Node / Angular (planned src/web client — Phase 16)
+# -----------------------------------------------------------------------------
+node_modules/
+.npm/
+.angular/
+typings/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -----------------------------------------------------------------------------
+# OS / editor clutter
+# -----------------------------------------------------------------------------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------------
+# Tool caches (dotnet watch / ef / analyzer caches)
+# -----------------------------------------------------------------------------
+.msbuild/
+.idea.build_server/

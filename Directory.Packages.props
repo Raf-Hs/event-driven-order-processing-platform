@@ -1,0 +1,23 @@
+<Project>
+
+  <!--
+    Central Package Management (PLAN.md §24): every PackageReference version is declared
+    exactly once here. Project files must not carry inline Version attributes.
+    Phases 1+ add packages (EF Core, broker clients, FluentValidation, OpenTelemetry, ...)
+    through reviewed changes to this file.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Hosts -->
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
+    <!-- Test stack (xUnit per PLAN.md §22) -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+  </ItemGroup>
+
+</Project>

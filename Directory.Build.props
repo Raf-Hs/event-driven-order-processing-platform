@@ -1,0 +1,18 @@
+<Project>
+
+  <!--
+    Central build defaults for the Event-Driven Order Processing Platform (PLAN.md §24):
+    nullable reference types, analyzers, deterministic builds, warnings as errors.
+    Individual projects may only override these with an explanatory comment.
+  -->
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+  </PropertyGroup>
+
+</Project>
