@@ -2,13 +2,13 @@
 
 > **Live progress tracker.** Owned and updated exclusively by the `architect` agent after every completed task and every phase transition. All other agents must read this file at the start of a task and must never write to it. Record only verified facts — never invent progress. When this file and the repository disagree, the repository wins and the discrepancy must be reported.
 
-_Last updated: 2026-10-07 — by architect (M0-GIT-01 completion and review)_
+_Last updated: 2026-10-07 — by architect (M0-01A review completion)_
 
 ## Project stage
 
-**PHASE 0 IN PROGRESS — no business functionality has been implemented.**
+**PHASE 0 IN PROGRESS — scaffold is verified; no business functionality has been implemented.**
 
-The repository contains the planning and agent-configuration baseline plus the empty .NET solution/project scaffolds. A Git baseline has been committed on `main`. The scaffold contains host boilerplate and placeholder tests only; no domain behavior, endpoints, database schemas, messaging implementation, infrastructure, or CI pipeline exists.
+The repository contains the planning and agent-configuration baseline plus the empty .NET solution/project scaffolds. The Git baseline is pushed to `origin/main`. The scaffold contains host boilerplate and placeholder tests only; no domain behavior, endpoints, database schemas, messaging implementation, infrastructure, or CI pipeline exists. A clean clone of `origin/main` restored, built, and passed the eight scaffold tests.
 
 ## Current phase
 
@@ -18,9 +18,9 @@ The repository contains the planning and agent-configuration baseline plus the e
 
 ## Current task
 
-**M0-GIT-01 is complete and reviewed.** The .NET scaffold for M0-01A is already present in the repository and its implementation report was returned; it still needs an independent review before the remaining Phase 0 work proceeds.
+**M0-01A scaffold review is complete (PASS).** The scaffold was present in the pushed baseline and has been independently reviewed and verified from a clean clone.
 
-- **Next: review the existing M0-01A scaffold** against the task brief and Phase 0 criteria. Do not add CI or proceed with other Phase 0 changes until that review is complete. M0-01 remaining work includes CI, GitHub templates, and a human license decision; no GitHub Actions have been created.
+- **Next task: M0-01B — Phase 0 GitHub and CI foundation.** Add the planned minimal PR validation workflow and GitHub contribution templates. No GitHub Actions have been created yet. The license decision remains with the repository owner.
 
 ## Completed phases
 
@@ -32,7 +32,8 @@ The repository contains the planning and agent-configuration baseline plus the e
 
 | Task ID | Description | Review verdict | Date | Evidence (tests/artifacts/docs) |
 |---|---|---|---|---|
-| M0-GIT-01 | Initialize Git, add .NET `.gitignore`, create baseline commit, configure `origin` | PASS | 2026-10-07 | Initial commit `9cb8ec7a808027cc66a5d086ea28f98461766d34`; reviewer PASS; branch `main`; remote configured; working tree clean at task completion; no push. |
+| M0-GIT-01 | Initialize Git, add .NET `.gitignore`, create baseline commit, configure `origin` | PASS | 2026-10-07 | Initial commit `9cb8ec7a808027cc66a5d086ea28f98461766d34`; reviewer PASS; branch `main`; remote configured; baseline subsequently pushed. |
+| M0-01A-REVIEW | Independently review existing empty .NET scaffold and verify clean-clone build/test | PASS | 2026-10-07 | Reviewer PASS; clean clone at `ddf625c606f2b1d787247130018a4479096856da`; `dotnet restore`, `dotnet build --no-restore` (0 warnings/errors), and `dotnet test --no-build` (8 passed). |
 
 ## Active decisions (ADRs)
 
@@ -47,8 +48,9 @@ The repository contains the planning and agent-configuration baseline plus the e
 - MVP boundaries are fixed: three deployables (Commerce API, Inventory Worker, Payment Worker), database-per-service, RabbitMQ local / Azure Service Bus in Azure, orchestrated saga, outbox/inbox, at-least-once + idempotent consumers.
 - Explicitly excluded: Kubernetes, event sourcing, CQRS infrastructure, generic workflow engine, multi-region, real payments/card data, shipment, notification service (Phase 2), cancellation flows (Phase 2), Azure Storage/Functions as MVP dependencies.
 - OpenCode multi-agent structure is in place: `architect` (primary orchestrator) delegating to `implementer`, `reviewer` (read-only), `infra`, `escalation`; subagent depth 1 (workers cannot spawn workers).
-- Git repository initialized on `main`; `origin` is configured as `https://github.com/Raf-Hs/event-driven-order-processing-platform.git`. Initial commit has not been pushed.
+- Git repository is on `main`; `origin` is `https://github.com/Raf-Hs/event-driven-order-processing-platform.git`; baseline commit `ddf625c606f2b1d787247130018a4479096856da` was verified equal to `origin/main` during this task.
 - No license choice is recorded; do not add a license until the repository owner decides.
+- The six local development settings/launch-profile files are intentionally ignored and absent from a clean clone; the solution builds and tests without them.
 
 ## Known blockers
 
@@ -56,8 +58,8 @@ The repository contains the planning and agent-configuration baseline plus the e
 
 ## Next task
 
-1. Independently review the existing M0-01A scaffold and record PASS/FAIL.
-2. After review, complete remaining M0-01 foundation work (GitHub templates and minimal CI) through the appropriate worker and reviewer; obtain the owner's license choice before adding `LICENSE`.
+1. **M0-01B — Phase 0 GitHub and CI foundation:** add minimal PR validation workflow and GitHub contribution templates through INFRA, then independent REVIEWER pass.
+2. Resolve the human license choice and accept/reject the proposed ADR-001/002 before declaring M0 complete. Do not begin Phase 1 until all Phase 0 exit criteria in `PLAN.md` are evidenced.
 
 ## Update protocol (for the architect)
 

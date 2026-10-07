@@ -20,4 +20,4 @@ Instructions for all AI agents working in this repository.
 - Database-per-service; no cross-service data access or shared business logic; no synchronous service-to-service calls in the order workflow.
 - Transactional outbox + transactional inbox + idempotent consumers + at-least-once delivery. Never claim exactly-once.
 - No future-phase scope creep; no secrets in code, config, images, workflows, logs, or docs.
-- Implementation has not started yet (planning stage). The first task is M0-01 as defined in `PLAN.md` — do not begin implementation work without an explicit task brief from the architect.
+- Phase 0 is in progress: the empty .NET solution/project scaffold and Git baseline are present, but no business/domain functionality has been implemented. Read `docs/current-state.md` for the verified current task. Do not begin any work without an explicit task brief from the architect.
